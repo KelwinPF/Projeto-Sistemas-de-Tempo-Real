@@ -54,8 +54,8 @@ void readReset(BlackGPIO* bt);
 void createNewSequence(int *s); 
 void show(int color);
 void blink(int time);
-void blinkWin();
-void blinkDerrota();
+void blinkF(int time);
+void blinkB(int time);
 bool verifyAnswer(int i);
 void ligarluzes();
  
@@ -113,14 +113,14 @@ int main(int argc, char * argv[]){
                 if(!resetGame && !endGame){
                     if(!timeOut) correctAnswer = verifyAnswer(i);
                     if(correctAnswer){
-                        blinkWin();
+                        blinkF(70000);
                         i++;
                         errors = 0;
                         if(i>seqSize-1) lvl = 2;
                     }
                     else{
+                        blink(500000);
                         errors++;
-                        blinkDerrota();
                     }
                     if(errors>1) {startGameBt = false; resetGame = true;}
                     usleep(1000000);//1s
@@ -141,13 +141,13 @@ int main(int argc, char * argv[]){
 }
 //FUNCOES********************************************************
  void ligarluzes(){
- for(int i=0;i<nColors;i++) arrayLeds[i]->setValue(low);
  arrayLeds[0]->setValue(high);
- sleep(1);
+ usleep(50000);
  arrayLeds[1]->setValue(high);
- sleep(1);
+ usleep(50000);
  arrayLeds[2]->setValue(high);
- sleep(1);
+ usleep(50000);
+ for(int i=0;i<nColors;i++) arrayLeds[i]->setValue(low);
 }
 void readReset(BlackGPIO* bt){
     string i;
@@ -207,17 +207,15 @@ void blink(int time){
     usleep(time);
     for(int i=0;i<nColors;i++) arrayLeds[i]->setValue(low);
 }
-void blinkWin(){
+void blinkF(int time){
     for(int i=0;i<nColors;i++) arrayLeds[i]->setValue(low);
-    for(int i=0;i<nColors;i++) {arrayLeds[i]->setValue(high);}
-    sleep(1);
-    for(int i=0;i<nColors;i++) {arrayLeds[i]->setValue(low);}
-    sleep(1);
+    for(int i=0;i<nColors;i++) {arrayLeds[i]->setValue(high); usleep(time);}
+    usleep(time);
+    for(int i=0;i<nColors;i++) {arrayLeds[i]->setValue(low); usleep(time);}
 }
-void blinkDerrota(){
+void blinkB(int time){
     for(int i=nColors-1;i>=0;i--) arrayLeds[i]->setValue(low);
-    arrayLeds[1]->setValue(high);
-    sleep(1);
-    arrayLeds[1]->setValue(low);
-    sleep(1);
+    for(int i=nColors-1;i>=0;i--) {arrayLeds[i]->setValue(high); usleep(time);}
+    usleep(time);
+    for(int i=nColors-1;i>=0;i--) {arrayLeds[i]->setValue(low); usleep(time);}
 }

@@ -1,4 +1,3 @@
-
 #include <vector>
 #include <time.h>
 #include <unistd.h>
@@ -63,7 +62,6 @@ void ligarluzes();
  
 int main(int argc, char * argv[]){
     //inicialização
-    printf("aperte sterat");
     sequence = new int[seqSize];
     userInputs = new int[seqSize];  
     arrayLeds.push_back(&rLed);
@@ -73,7 +71,6 @@ int main(int argc, char * argv[]){
     thread white (readInputs, &wBt, 1);
     thread blue (readInputs, &bBt, 2);
     thread reset (readReset, &resetBt);
-    printf("aperte sterat");
      
     bool correctAnswer, timeOut;
     time_t initialTime, currentTime, limitTime, oCTime;
@@ -82,7 +79,6 @@ int main(int argc, char * argv[]){
     //inicio do jogo
     while(!endGame){
         resetGame = false;
-        printf("aperte sterat");
         ligarluzes();
         while(!resetGame && !endGame && startGameBt){
             int i = 0;

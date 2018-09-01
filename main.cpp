@@ -80,6 +80,7 @@ int main(int argc, char * argv[]){
     //inicio do jogo
     while(!endGame){
         resetGame = false;
+        printf("aperte sterat");
         ligarluzes();
         while(!resetGame && !endGame && startGameBt){
             int i = 0;

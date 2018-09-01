@@ -63,6 +63,7 @@ void ligarluzes();
  
 int main(int argc, char * argv[]){
     //inicialização
+    printf("aperte sterat");
     sequence = new int[seqSize];
     userInputs = new int[seqSize];  
     arrayLeds.push_back(&rLed);
@@ -72,6 +73,7 @@ int main(int argc, char * argv[]){
     thread white (readInputs, &wBt, 1);
     thread blue (readInputs, &bBt, 2);
     thread reset (readReset, &resetBt);
+    printf("aperte sterat");
      
     bool correctAnswer, timeOut;
     time_t initialTime, currentTime, limitTime, oCTime;

@@ -87,7 +87,7 @@ int main(int argc, char * argv[]){
             tLed = 1000000/lvl;//tempo de led ligado em microssegundos
             createNewSequence(sequence);
             usleep(1000000);
-            while(i<seqSize && !endGame && !resetGame)
+            while(i<seqSize && !endGame && !resetGame){
                 /*mostra sequencia*/               
                 for(int j=0; j<=i; j++) {show(sequence[j]);}      
           

@@ -117,7 +117,7 @@ int main(int argc, char * argv[]){
                     }
                     else{
                         errors++;
-                        BlinkDerrota();
+                        blinkDerrota();
                     }
                     if(errors>1) {startGameBt = false; resetGame = true;}
                     usleep(1000000);//1s
@@ -129,10 +129,11 @@ int main(int argc, char * argv[]){
     red.join();
     white.join();
     blue.join();
- 
+    reset.join();
+
     delete[] sequence;
     delete[] userInputs;
-     
+
     return 0;
 }
 //FUNCOES********************************************************

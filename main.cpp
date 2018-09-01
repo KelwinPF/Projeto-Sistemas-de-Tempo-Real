@@ -9,12 +9,12 @@ int main (int arcgc,char * argv[]){
   BlackGPIO saida(GPIO_14,output);
   BlackGPIO entrada(GPIO_67,output); 
   while(true){
-  string val = entrada.getvalue();
+  string val = entrada.getValue();
    if(val=="1"){
-      saida.getvalue(high);
+      saida.getValue(high);
       cout << "high" << endl;
    }else{
-      saida.getvalue(low);
+      saida.getValue(low);
       cout << "low" << endl;
    }
   }

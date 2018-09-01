@@ -7,7 +7,7 @@ using namespace std;
 int main (int arcgc,char * argv[]){
   cout << "Example 1 - GPIO (in/out)" << endl;
   BlackGPIO saida(GPIO_14,output);
-  BlackGPIO entrada(GPIO_67,output); 
+  BlackGPIO entrada(GPIO_67,intput); 
   while(true){
   string val = entrada.getValue();
    if(val=="1"){

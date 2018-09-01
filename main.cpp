@@ -68,11 +68,9 @@ int main(int argc, char * argv[]){
     arrayLeds.push_back(&rLed);
     arrayLeds.push_back(&wLed);
     arrayLeds.push_back(&bLed);
-    arrayLeds.push_back(&yLed);
     thread red (readInputs, &rBt, 0);
     thread white (readInputs, &wBt, 1);
     thread blue (readInputs, &bBt, 2);
-    thread yellow (readInputs, &yBt, 3);
     thread reset (readReset, &resetBt);
      
     bool correctAnswer, timeOut;

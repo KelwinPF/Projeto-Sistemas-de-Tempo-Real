@@ -129,7 +129,6 @@ int main(int argc, char * argv[]){
     red.join();
     white.join();
     blue.join();
-    yellow.join();
  
     delete[] sequence;
     delete[] userInputs;

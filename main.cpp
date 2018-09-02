@@ -111,12 +111,35 @@ int main(int argc ,char * argv[])
 
       while(!(game_over(&snake1,&pos1)))
       {
-      string bt1 = bBt.getValue();
-      string rt1 = rBt.getValue();
-      string yt1 = yBt.getValue();
-      string wt1 = wBt.getValue();
 	 while (!kbhit())
           {
+    		  string bt1 = bBt.getValue();
+      		string rt1 = rBt.getValue();
+      		string yt1 = yBt.getValue();
+     		 string wt1 = wBt.getValue();
+		 	  	 for (int a=0;a<4;a++){
+	  		if (bt1=="1"){
+           		p='a';
+	 	 	}
+			else {
+	 			if(rt1=="1"){
+				p='s';
+				}
+				else{
+					if (yt1=="1"){
+           				p='w';
+	 				}else{
+						if(wt1=="1"){
+							p='d';
+						}
+						else{
+							p='s';
+						}
+					}	
+				}
+			}
+	 	 }
+	         snake1.direction=p;
                  usleep(snake_speed);
                  snake_move(&snake1,&pos1,&food1,&score);
                  if (game_over(&snake1,&pos1))
@@ -124,7 +147,7 @@ int main(int argc ,char * argv[])
                      break;
                  }
 
-	 }
+	 	}
        
 
           snake1.prev_direction=snake1.direction;

@@ -14,7 +14,7 @@ using namespace BlackLib;
 #define up 119
 #define left 97
 #define right 100
-int snake_speed=350000;
+int snake_speed=100000;
 
 int rPinBt = 67;//GPIO_67,input
 int wPinBt = 68;//GPIO_68,input
@@ -143,7 +143,9 @@ int main(int argc ,char * argv[])
 		else if(wt1=="1"){
 		p='d';
 		}
-
+		else {
+			p='x';
+		}
 	 	 }
           snake1.direction=p;
 

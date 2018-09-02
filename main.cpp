@@ -145,7 +145,7 @@ int main(int argc ,char * argv[])
 		}
 
 	 	 }
-          snake1.direction=getchar();
+          snake1.direction=p;
 
 
 

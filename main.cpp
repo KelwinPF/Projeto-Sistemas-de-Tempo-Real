@@ -5,6 +5,9 @@
 #include <fcntl.h>
 #include <ncurses.h>
 #include <time.h>
+#include <thread>
+#include <iostream>
+#include <pthread.h>
 #include "BlackGPIO/BlackGPIO.h"
 #include "ADC/Adc.h"
 using namespace BlackLib;
@@ -64,9 +67,9 @@ void pos_init(snake_pos *pos1);
 void food_init(food *food1);
 void gotoxy(int,int);
 void snake_place(snake *snake1, snake_pos *pos1);
-void snake_move(snake *snake1, snake_pos *pos1, food *food1, int*);
+void snake_move(BlackGPIO* bt,snake *snake1, snake_pos *pos1, food *food1, int*);
 void move_tail(snake *snake1, snake_pos *pos1);
-void move_head(snake *snake1, snake_pos *pos1);
+void move_head(BlackGPIO* bt,snake *snake1, snake_pos *pos1);
 void food_print(food *food1);
 int game_over(snake *snake1, snake_pos *pos1);
 void set_borders();
@@ -89,10 +92,16 @@ int main(int argc ,char * argv[])
       snake_init(&snake1);
       pos_init(&pos1);
       food_init(&food1);
+string bt1 = bBt.getValue();
+    string rt1 = rBt.getValue();
+   string yt1 = yBt.getValue();
+ string wt1 = wBt.getValue();
+
+    thread red (move_head, &rBt,&snake1,&pos1);
+    thread white (move_head, &wBt,&snake1,&pos1);
+    thread blue (move_head, &bBt,&snake1,&pos1);
+    thread yellow (move_head, &yBt,&snake1,&pos1);
 	
-
-   
-
       system("clear");
       system("stty -echo");
       int curs_set(int num);   
@@ -111,14 +120,10 @@ int main(int argc ,char * argv[])
 
       while(!(game_over(&snake1,&pos1)))
       {
-	        string bt1 = bBt.getValue();
-      		string rt1 = rBt.getValue();
-      		string yt1 = yBt.getValue();
-     		 string wt1 = wBt.getValue();
 	 while (!kbhit())
           {
                  usleep(snake_speed);
-                 snake_move(&snake1,&pos1,&food1,&score);
+                 snake_move(&bt,&snake1,&pos1,&food1,&score);
                  if (game_over(&snake1,&pos1))
                  {
                      break;
@@ -223,9 +228,9 @@ printf("\n");
 
 
 
-void snake_move(snake *snake1, snake_pos *pos1, food *food1, int *score)
+void snake_move(BlackGPIO* bt,snake *snake1, snake_pos *pos1, food *food1, int *score)
 {
-    move_head(snake1,pos1);
+    move_head(bt,snake1,pos1);
 
     if (!((snake1->head_X==food1->X) && (snake1->head_Y==food1->Y)))
     {
@@ -263,7 +268,7 @@ void move_tail(snake *snake1, snake_pos *pos1)
 
 
 
-void move_head(snake *snake1, snake_pos *pos1)
+void move_head(BlackGPIO* bt,snake *snake1, snake_pos *pos1)
 {
     switch (snake1->direction)
         {

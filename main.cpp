@@ -6,15 +6,15 @@ using namespace std;
 
 int main (int arcgc,char * argv[]){
   cout << "Example 1 - GPIO (in/out)" << endl;
-  BlackGPIO saida(GPIO_26,output);
+  BlackGPIO saida(GPIO_46,output);
   BlackGPIO entrada(GPIO_67,input); 
   while(true){
   string val = entrada.getValue();
    if(val=="1"){
-      saida.setValue(low);
+      saida.setValue(high);
       cout << "high" << endl;
    }else{
-      saida.setValue(high);
+      saida.setValue(low);
       cout << "low" << endl;
    }
   }

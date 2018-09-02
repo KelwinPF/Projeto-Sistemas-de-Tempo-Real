@@ -115,7 +115,7 @@ int main(int argc ,char * argv[])
       		string rt1 = rBt.getValue();
       		string yt1 = yBt.getValue();
      		 string wt1 = wBt.getValue();
-	 while (!kbhit)
+	 while (!kbhit())
           {
                  usleep(snake_speed);
                  snake_move(&snake1,&pos1,&food1,&score);

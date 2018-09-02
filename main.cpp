@@ -249,10 +249,6 @@ void move_tail(snake *snake1, snake_pos *pos1)
 
 void move_head(snake *snake1, snake_pos *pos1)
 {
-      string bt1 = bBt.getValue();
-      string rt1 = rBt.getValue();
-      string yt1 = yBt.getValue();
-      string wt1 = wBt.getValue();
     switch (snake1->direction)
         {
             case (bBt=="1"):

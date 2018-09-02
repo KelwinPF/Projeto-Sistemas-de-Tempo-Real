@@ -250,51 +250,45 @@ void move_tail(snake *snake1, snake_pos *pos1)
 
 void move_head(snake *snake1, snake_pos *pos1)
 {
-    switch (snake1->direction)
-        {
-            case (bBt=="1"):
+            if(bBt=="1"){
                 if (snake1->prev_direction==left)
                 {
                     snake1->head_X--;
-                    break;
+ 
                 }
                     snake1->head_X++;
-                    break;
 
-            case (rBt=="1"):
+	    }
+            else if(rBt=="1"){
                 if (snake1->prev_direction==right)
                 {
                     snake1->head_X++;
-                    break;
+   
                 }
                     snake1->head_X--;
-                    break;
 
-
-            case (yBt=="1"):
+	    }
+             
+            else if(yBt=="1"){
                 if (snake1->prev_direction==down)
                 {
                     snake1->head_Y++;
-                    break;
+
                 }
                     snake1->head_Y--;
-                    break;
 
+	    }
 
-            case (wBt=="1"):
+             else if (wBt=="1"){
                 if (snake1->prev_direction==up)
                 {
                     snake1->head_Y--;
-                    break;
+
                 }
                     snake1->head_Y++;
-                    break;
-
-
-            default:
-                 break;
-        }
-
+	     }
+            else{
+	    }
 
         // update tail position
         pos1->X[snake1->size]=snake1->head_X;

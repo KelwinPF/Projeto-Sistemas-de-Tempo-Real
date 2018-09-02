@@ -85,7 +85,6 @@ int main(int argc ,char * argv[])
      int score=0;
      int num =0;
 
-      BlackGPIO bt;
       snake snake1;
       snake_pos pos1;
       food food1;

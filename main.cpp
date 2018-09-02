@@ -74,9 +74,12 @@ void print_score(int*);
 
 int main()
 {
-	
+	BlackGPIO rBt((gpioName)rPinBt,input);
+BlackGPIO wBt((gpioName)wPinBt,input);
+BlackGPIO bBt((gpioName)bPinBt,input);
+BlackGPIO yBt((gpioName)yPinBt,input);
      
-     time_t tempo1, tempo2 deltaT;
+     time_t tempo1, tempo2, deltaT;
      tempo1 = time( (time_t *) 0);
      int score=0;
      int num =0;
@@ -117,10 +120,10 @@ int main()
 
           while (!kbhit())
           {
-      string bt1 = bBt.getValue();
-      string rt1 = rBt.getValue();
-      string yt1 = yBt.getValue();
-      string wt1 = wBt.getValue();
+      		string bt1 = bBt.getValue();
+     	 	string rt1 = rBt.getValue();
+      		string yt1 = yBt.getValue();
+      		string wt1 = wBt.getValue();
                  usleep(snake_speed);
                  snake_move(&snake1,&pos1,&food1,&score);
                  if (game_over(&snake1,&pos1))

@@ -20,10 +20,6 @@ int rPinBt = 67;//GPIO_67,input
 int wPinBt = 68;//GPIO_68,input
 int bPinBt = 44;//GPIO_44,input
 int yPinBt = 26;//GPIO_26,input
-BlackGPIO rBt((gpioName)rPinBt,input);
-BlackGPIO wBt((gpioName)wPinBt,input);
-BlackGPIO bBt((gpioName)bPinBt,input);
-BlackGPIO yBt((gpioName)yPinBt,input);
 typedef struct Snake
 {
     char symbol;

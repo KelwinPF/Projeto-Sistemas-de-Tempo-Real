@@ -21,6 +21,11 @@ int wPinBt = 68;//GPIO_68,input
 int bPinBt = 44;//GPIO_44,input
 int yPinBt = 26;//GPIO_26,input
 
+BlackGPIO rBt((gpioName)rPinBt,input);
+BlackGPIO wBt((gpioName)wPinBt,input);
+BlackGPIO bBt((gpioName)bPinBt,input);
+BlackGPIO yBt((gpioName)yPinBt,input);
+
 typedef struct Snake
 {
     char symbol;
@@ -71,10 +76,6 @@ void print_score(int*);
 
 int main(int argc ,char * argv[])
 {
-BlackGPIO rBt((gpioName)rPinBt,input);
-BlackGPIO wBt((gpioName)wPinBt,input);
-BlackGPIO bBt((gpioName)bPinBt,input);
-BlackGPIO yBt((gpioName)yPinBt,input);
      
      time_t tempo1, tempo2, deltaT;
      tempo1 = time( (time_t *) 0);

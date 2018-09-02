@@ -111,17 +111,10 @@ int main(int argc ,char * argv[])
 
       while(!(game_over(&snake1,&pos1)))
       {
-      string bt1 = bBt.getValue();
-      string rt1 = rBt.getValue();
-      string yt1 = yBt.getValue();
-      string wt1 = wBt.getValue();
 
           while (!kbhit())
           {
-      		string bt1 = bBt.getValue();
-     	 	string rt1 = rBt.getValue();
-      		string yt1 = yBt.getValue();
-      		string wt1 = wBt.getValue();
+
                  usleep(snake_speed);
                  snake_move(&snake1,&pos1,&food1,&score);
                  if (game_over(&snake1,&pos1))
@@ -250,7 +243,11 @@ void move_tail(snake *snake1, snake_pos *pos1)
 
 void move_head(snake *snake1, snake_pos *pos1)
 {
-            if(bBt=="1"){
+      string bt1 = bBt.getValue();
+      string rt1 = rBt.getValue();
+      string yt1 = yBt.getValue();
+      string wt1 = wBt.getValue();
+            if(bt1=="1"){
                 if (snake1->prev_direction==left)
                 {
                     snake1->head_X--;
@@ -259,7 +256,7 @@ void move_head(snake *snake1, snake_pos *pos1)
                     snake1->head_X++;
 
 	    }
-            else if(rBt=="1"){
+            else if(rt1=="1"){
                 if (snake1->prev_direction==right)
                 {
                     snake1->head_X++;
@@ -269,7 +266,7 @@ void move_head(snake *snake1, snake_pos *pos1)
 
 	    }
              
-            else if(yBt=="1"){
+            else if(yt1=="1"){
                 if (snake1->prev_direction==down)
                 {
                     snake1->head_Y++;
@@ -279,7 +276,7 @@ void move_head(snake *snake1, snake_pos *pos1)
 
 	    }
 
-             else if (wBt=="1"){
+             else if (wbt=="1"){
                 if (snake1->prev_direction==up)
                 {
                     snake1->head_Y--;

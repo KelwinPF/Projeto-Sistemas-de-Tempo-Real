@@ -144,7 +144,7 @@ int main(int argc ,char * argv[])
 							p='d';
 						}
 						else{
-							p='x';	
+							p='s';	
 						}
 					}	
 				}

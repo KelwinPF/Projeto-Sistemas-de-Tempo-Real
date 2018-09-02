@@ -115,7 +115,7 @@ int main(int argc ,char * argv[])
       		string rt1 = rBt.getValue();
       		string yt1 = yBt.getValue();
      		 string wt1 = wBt.getValue();
-	 while (!kbhit())
+	 while (1)
           {
                  usleep(snake_speed);
                  snake_move(&snake1,&pos1,&food1,&score);
@@ -150,7 +150,7 @@ int main(int argc ,char * argv[])
 				}
 			}
 	 	 }
-	     snake1->direction=p;
+	     snake1.direction=p;
 
      }
       tempo2 = time( (time_t *) 0);

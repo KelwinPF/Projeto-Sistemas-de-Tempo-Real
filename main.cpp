@@ -130,26 +130,27 @@ int main(int argc ,char * argv[])
           snake1.prev_direction=snake1.direction;
 	  	 for (int a=0;a<4;a++){
 	  		if (bt1=="1"){
-           		snake1.direction=left;
+           		p='a';
 	 	 	}
 			else {
 	 			if(rt1=="1"){
-				snake1.direction=down;
+				p='s';
 				}
 				else{
 					if (yt1=="1"){
-           				snake1.direction=up;
+           				p='w';
 	 				}else{
 						if(wt1=="1"){
-							snake1.direction=right;
+							p='d';
 						}
 						else{
-							snake1.direction=down;	
+							p='s';
 						}
 					}	
 				}
 			}
 	 	 }
+	     snake1.direction=p;
 
      }
       tempo2 = time( (time_t *) 0);
@@ -274,6 +275,7 @@ void move_head(snake *snake1, snake_pos *pos1)
                 }
                     snake1->head_X++;
                     break;
+		    snake1->prev_direction=right;
 		    
 
             case 's':
@@ -284,6 +286,7 @@ void move_head(snake *snake1, snake_pos *pos1)
                 }
                     snake1->head_X--;
                     break;
+		    snake1->prev_direction=down;
 
 
             case 'w':
@@ -294,6 +297,7 @@ void move_head(snake *snake1, snake_pos *pos1)
                 }
                     snake1->head_Y--;
                     break;
+		    snake1->prev_direction=up;
 
 
             case 'a':
@@ -304,6 +308,7 @@ void move_head(snake *snake1, snake_pos *pos1)
                 }
                     snake1->head_Y++;
                     break;
+		    snake1->prev_direction=down;
 		    
             default:
                  break;

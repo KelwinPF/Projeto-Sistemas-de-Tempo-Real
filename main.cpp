@@ -7,7 +7,7 @@
 #include <time.h>
 #include "BlackGPIO/BlackGPIO.h"
 #include "ADC/Adc.h"
-using namespace BlackLib
+using namespace BlackLib;
 #define vertical 20
 #define horizontal 80
 #define down 115

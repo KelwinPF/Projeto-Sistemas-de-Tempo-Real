@@ -130,21 +130,21 @@ int main(int argc ,char * argv[])
           snake1.prev_direction=snake1.direction;
 	  	 for (int a=0;a<4;a++){
 	  		if (bt1=="1"){
-           		p='a';
+           		p='left';
 	 	 	}
 			else {
 	 			if(rt1=="1"){
-				p='s';
+				p='down';
 				}
 				else{
 					if (yt1=="1"){
-           				p='w';
+           				p='up';
 	 				}else{
 						if(wt1=="1"){
-							p='d';
+							p='right';
 						}
 						else{
-							p='s';	
+							p='x';	
 						}
 					}	
 				}
@@ -267,7 +267,7 @@ void move_head(snake *snake1, snake_pos *pos1)
 {
     switch (snake1->direction)
         {
-            case 'd':
+            case 'right':
                 if (snake1->prev_direction==left)
                 {
                     snake1->head_X--;
@@ -276,7 +276,7 @@ void move_head(snake *snake1, snake_pos *pos1)
                     snake1->head_X++;
                     break;
 
-            case 'a':
+            case 'left':
                 if (snake1->prev_direction==right)
                 {
                     snake1->head_X++;
@@ -286,7 +286,7 @@ void move_head(snake *snake1, snake_pos *pos1)
                     break;
 
 
-            case 'w':
+            case 'up':
                 if (snake1->prev_direction==down)
                 {
                     snake1->head_Y++;
@@ -296,7 +296,7 @@ void move_head(snake *snake1, snake_pos *pos1)
                     break;
 
 
-            case 's':
+            case 'left':
                 if (snake1->prev_direction==up)
                 {
                     snake1->head_Y--;

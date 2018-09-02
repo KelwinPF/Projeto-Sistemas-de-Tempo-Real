@@ -5,8 +5,6 @@
 #include <fcntl.h>
 #include <ncurses.h>
 #include <time.h>
-#include <thread>
-#include <pthread.h>
 #include "BlackGPIO/BlackGPIO.h"
 #include "ADC/Adc.h"
 

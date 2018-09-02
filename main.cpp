@@ -111,11 +111,12 @@ int main(int argc ,char * argv[])
 
       while(!(game_over(&snake1,&pos1)))
       {
-	string bt1 = bBt.getValue();
+      string bt1 = bBt.getValue();
       string rt1 = rBt.getValue();
       string yt1 = yBt.getValue();
       string wt1 = wBt.getValue();
-
+	 while (!kbhit())
+          {
                  usleep(snake_speed);
                  snake_move(&snake1,&pos1,&food1,&score);
                  if (game_over(&snake1,&pos1))
@@ -123,30 +124,33 @@ int main(int argc ,char * argv[])
                      break;
                  }
 
-
+	 }
        
 
           snake1.prev_direction=snake1.direction;
 	  	 for (int a=0;a<4;a++){
-	  	if (bt1=="1"){
-           	p='a';
-	 	 }
-		else if(rt1=="1"){
-		p='s';
-		}
-		else if (yt1=="1"){
-           	p='w';
-	 	 }
-		else if(wt1=="1"){
-		p='d';
-		}
-		else {
-			p='x';
-		}
+	  		if (bt1=="1"){
+           		p='a';
+	 	 	}
+			else {
+	 			if(rt1=="1"){
+				p='s';
+				}
+				else{
+					if (yt1=="1"){
+           				p='w';
+	 				}else{
+						if(wt1=="1"){
+							p='d';
+						}
+						else{
+							p='x';	
+						}
+					}	
+				}
+			}
 	 	 }
           snake1.direction=p;
-
-
 
      }
       tempo2 = time( (time_t *) 0);
@@ -365,4 +369,30 @@ int game_over(snake *snake1, snake_pos *pos1)
 
 
     return 0;
+}
+int kbhit(void)
+{
+  struct termios oldt, newt;
+  int ch;
+  int oldf;
+
+  tcgetattr(STDIN_FILENO, &oldt);
+  newt = oldt;
+  newt.c_lflag &= ~(ICANON | ECHO);
+  tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+  oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
+  fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
+
+  ch = getchar();
+
+  tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+  fcntl(STDIN_FILENO, F_SETFL, oldf);
+
+  if(ch != EOF)
+  {
+    ungetc(ch, stdin);
+    return 1;
+  }
+
+  return 0;
 }

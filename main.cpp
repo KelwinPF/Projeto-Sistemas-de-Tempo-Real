@@ -116,9 +116,6 @@ int main(int argc ,char * argv[])
       string yt1 = yBt.getValue();
       string wt1 = wBt.getValue();
 
-          while (!kbhit())
-          {
-
                  usleep(snake_speed);
                  snake_move(&snake1,&pos1,&food1,&score);
                  if (game_over(&snake1,&pos1))
@@ -126,7 +123,7 @@ int main(int argc ,char * argv[])
                      break;
                  }
 
-          }
+
        
 
           snake1.prev_direction=snake1.direction;
@@ -368,31 +365,4 @@ int game_over(snake *snake1, snake_pos *pos1)
 
 
     return 0;
-}
-
-int kbhit(void)
-{
-  struct termios oldt, newt;
-  int ch;
-  int oldf;
-
-  tcgetattr(STDIN_FILENO, &oldt);
-  newt = oldt;
-  newt.c_lflag &= ~(ICANON | ECHO);
-  tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-  oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
-  fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
-
-  ch = getchar();
-
-  tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-  fcntl(STDIN_FILENO, F_SETFL, oldf);
-
-  if(ch != EOF)
-  {
-    ungetc(ch, stdin);
-    return 1;
-  }
-
-  return 0;
 }

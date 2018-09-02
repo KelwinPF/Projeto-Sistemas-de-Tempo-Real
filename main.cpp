@@ -14,8 +14,6 @@ BlackGPIO saida ((gpioName)rPinLed,output);
 
 int main (int arcgc,char * argv[]){
   
-  thread red (readInputs, &rBt, 0);
-  red.join();
   
   cout << "Example 1 - GPIO (in/out)" << endl;
 

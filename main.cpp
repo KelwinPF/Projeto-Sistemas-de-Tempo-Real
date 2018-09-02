@@ -58,7 +58,7 @@ typedef struct food
 }food;
 
 
-
+int kbhit();
 void snake_init(snake *snake1);
 void pos_init(snake_pos *pos1);
 void food_init(food *food1);
@@ -276,7 +276,7 @@ void move_head(snake *snake1, snake_pos *pos1)
 
 	    }
 
-             else if (wbt=="1"){
+             else if (wt1=="1"){
                 if (snake1->prev_direction==up)
                 {
                     snake1->head_Y--;
@@ -348,8 +348,6 @@ int game_over(snake *snake1, snake_pos *pos1)
 
     return 0;
 }
-
-
 
 int kbhit(void)
 {

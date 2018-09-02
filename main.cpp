@@ -111,12 +111,12 @@ int main(int argc ,char * argv[])
 
       while(!(game_over(&snake1,&pos1)))
       {
-	 while (!kbhit())
-          {
-    		  string bt1 = bBt.getValue();
+	        string bt1 = bBt.getValue();
       		string rt1 = rBt.getValue();
       		string yt1 = yBt.getValue();
      		 string wt1 = wBt.getValue();
+	 while (!kbhit())
+          {
 		 	  	 for (int a=0;a<4;a++){
 	  		if (bt1=="1"){
            		p='a';

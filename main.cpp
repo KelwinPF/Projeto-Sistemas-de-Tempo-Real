@@ -111,10 +111,10 @@ int main(int argc ,char * argv[])
 
       while(!(game_over(&snake1,&pos1)))
       {
-	string bt1 = rbt.getValue();
-      string rt1 = rbt.getValue();
-      string yt1 = rbt.getValue();
-      string wt1 = rbt.getValue();
+	string bt1 = bBt.getValue();
+      string rt1 = rBt.getValue();
+      string yt1 = yBt.getValue();
+      string wt1 = wBt.getValue();
 
           while (!kbhit())
           {

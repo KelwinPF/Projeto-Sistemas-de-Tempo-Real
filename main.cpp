@@ -76,7 +76,7 @@ void print_score(int*);
 
 int main(int argc ,char * argv[])
 {
-     
+     char p;
      time_t tempo1, tempo2, deltaT;
      tempo1 = time( (time_t *) 0);
      int score=0;
@@ -111,6 +111,10 @@ int main(int argc ,char * argv[])
 
       while(!(game_over(&snake1,&pos1)))
       {
+	string bt1 = rbt.getValue();
+      string rt1 = rbt.getValue();
+      string yt1 = rbt.getValue();
+      string wt1 = rbt.getValue();
 
           while (!kbhit())
           {
@@ -126,6 +130,21 @@ int main(int argc ,char * argv[])
        
 
           snake1.prev_direction=snake1.direction;
+	  	 for (int a=0;a<4;a++){
+	  	if (bt1=="1"){
+           	p='a';
+	 	 }
+		else if(rt1=="1"){
+		p='s';
+		}
+		else if (yt1=="1"){
+           	p='w';
+	 	 }
+		else if(wt1=="1"){
+		p='d';
+		}
+
+	 	 }
           snake1.direction=getchar();
 
 
@@ -243,49 +262,49 @@ void move_tail(snake *snake1, snake_pos *pos1)
 
 void move_head(snake *snake1, snake_pos *pos1)
 {
-      string bt1 = bBt.getValue();
-      string rt1 = rBt.getValue();
-      string yt1 = yBt.getValue();
-      string wt1 = wBt.getValue();
-            if(bt1=="1"){
+    switch (snake1->direction)
+        {
+            case 'd':
                 if (snake1->prev_direction==left)
                 {
                     snake1->head_X--;
- 
+                    break;
                 }
                     snake1->head_X++;
+                    break;
 
-	    }
-            else if(rt1=="1"){
+            case 'a':
                 if (snake1->prev_direction==right)
                 {
                     snake1->head_X++;
-   
+                    break;
                 }
                     snake1->head_X--;
+                    break;
 
-	    }
-             
-            else if(yt1=="1"){
+
+            case 'w':
                 if (snake1->prev_direction==down)
                 {
                     snake1->head_Y++;
-
+                    break;
                 }
                     snake1->head_Y--;
+                    break;
 
-	    }
 
-             else if (wt1=="1"){
+            case 's':
                 if (snake1->prev_direction==up)
                 {
                     snake1->head_Y--;
-
+                    break;
                 }
                     snake1->head_Y++;
-	     }
-            else{
-	    }
+                    break;
+		    
+            default:
+                 break;
+        }
 
         // update tail position
         pos1->X[snake1->size]=snake1->head_X;

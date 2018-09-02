@@ -6,7 +6,7 @@
 using namespace BlackLib;
 using namespace std;
 
-int rPinLed = 46;
+int rPinLed = 14;
 int rPinBt = 67;
 
 BlackGPIO entrada((gpioName)rPinBt,input);
@@ -20,10 +20,10 @@ int main (int arcgc,char * argv[]){
   while(true){
   string val = entrada.getValue();
    if(val=="1"){
-      saida->setValue(high);
+      saida.setValue(high);
       cout << "high" << endl;
    }else{
-      saida->setValue(low);
+      saida.setValue(low);
       cout << "low" << endl;
    }
   }

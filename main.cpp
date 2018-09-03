@@ -67,9 +67,9 @@ void pos_init(snake_pos *pos1);
 void food_init(food *food1);
 void gotoxy(int,int);
 void snake_place(snake *snake1, snake_pos *pos1);
-void snake_move(BlackGPIO* bt,snake *snake1, snake_pos *pos1, food *food1, int*);
+void snake_move(snake *snake1, snake_pos *pos1, food *food1, int*);
 void move_tail(snake *snake1, snake_pos *pos1);
-void move_head(BlackGPIO* bt,snake *snake1, snake_pos *pos1);
+void move_head(snake *snake1, snake_pos *pos1);
 void food_print(food *food1);
 int game_over(snake *snake1, snake_pos *pos1);
 void set_borders();
@@ -95,11 +95,6 @@ string bt1 = bBt.getValue();
     string rt1 = rBt.getValue();
    string yt1 = yBt.getValue();
  string wt1 = wBt.getValue();
-
-    thread red (snake_move, &rBt,&snake1,&pos1);
-    thread white (snake_move, &wBt,&snake1,&pos1);
-    thread blue (snake_move, &bBt,&snake1,&pos1);
-    thread yellow (snake_move, &yBt,&snake1,&pos1);
 	
       system("clear");
       system("stty -echo");
@@ -122,7 +117,7 @@ string bt1 = bBt.getValue();
 	 while (!kbhit())
           {
                  usleep(snake_speed);
-                // snake_move(&snake1,&pos1,&food1,&score);
+                 snake_move(&snake1,&pos1,&food1,&score);
                  if (game_over(&snake1,&pos1))
                  {
                      break;
@@ -158,10 +153,7 @@ string bt1 = bBt.getValue();
 	     
 
      }
-  red.join();
-    white.join();
-    blue.join();
-    yellow.join();
+	
       tempo2 = time( (time_t *) 0);
       system ("/bin/stty cooked");
       system("stty echo");
@@ -232,9 +224,9 @@ printf("\n");
 
 
 
-void snake_move(BlackGPIO* bt,snake *snake1, snake_pos *pos1, food *food1, int *score)
+void snake_move(snake *snake1, snake_pos *pos1, food *food1, int *score)
 {
-    move_head(bt,snake1,pos1);
+    move_head(snake1,pos1);
 
     if (!((snake1->head_X==food1->X) && (snake1->head_Y==food1->Y)))
     {
@@ -272,7 +264,7 @@ void move_tail(snake *snake1, snake_pos *pos1)
 
 
 
-void move_head(BlackGPIO* bt,snake *snake1, snake_pos *pos1)
+void move_head(snake *snake1, snake_pos *pos1)
 {
     switch (snake1->direction)
         {

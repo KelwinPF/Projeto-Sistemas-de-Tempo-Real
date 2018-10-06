@@ -42,8 +42,14 @@ int main(){
             setCPU(0);
             while(1){
                 carga(tCarga);
-                if(i%2==0) f1Led.setValue(high);
-                else f1Led.setValue(low);
+                if(i%2==0) {
+                 print("high");
+                 f1Led.setValue(high);
+                }
+                else{ 
+                 print("low");
+                 f1Led.setValue(low);
+                }
                 i++;
             }
             exit(0);

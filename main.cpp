@@ -33,7 +33,7 @@ int main(){
     int alta = -10;
     int media = 0;
     int baixa = 5;
- 
+    printf("high");
     pidFilho1 = fork();//cria filho 1
     switch(pidFilho1){
         case -1:
@@ -43,11 +43,11 @@ int main(){
             while(1){
                 carga(tCarga);
                 if(i%2==0) {
-                 printf("high");
+   
                  f1Led.setValue(high);
                 }
                 else{ 
-                 printf("low");
+
                  f1Led.setValue(low);
                 }
                 i++;

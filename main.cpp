@@ -33,7 +33,7 @@ int main(){
     int alta = -10;
     int media = 0;
     int baixa = 5;
-    printf("high");
+    printf("teste");
     pidFilho1 = fork();//cria filho 1
     switch(pidFilho1){
         case -1:

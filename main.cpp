@@ -43,11 +43,11 @@ int main(){
             while(1){
                 carga(tCarga);
                 if(i%2==0) {
-                 print("high");
+                 printf("high");
                  f1Led.setValue(high);
                 }
                 else{ 
-                 print("low");
+                 printf("low");
                  f1Led.setValue(low);
                 }
                 i++;

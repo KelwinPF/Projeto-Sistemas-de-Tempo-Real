@@ -74,7 +74,7 @@ int main(){
             }
     }
     exit(0);
- 
+}
 void carga(int k){
     float f = 0.999999;
     for(int i=0; i<k; i++){

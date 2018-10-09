@@ -21,7 +21,7 @@ int setCPU(int i);
 int main(){
  
     int i=0;
-    int tCarga = 300;
+    int tCarga = 50;
  
     unsigned int pidFilho1, pidFilho2;
  

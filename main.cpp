@@ -120,9 +120,9 @@ int main(){
     thread envia(enviaPrioridades);
     usleep(1000000);
     trocaPorta = false;
-    cout<<"digite a porta para envio";
+   //cout<<"digite a porta para envio";
 
-    cin>> portaEnvio;
+    //cin>> portaEnvio;
 
     thread recebe(recebePrioridades);
 

@@ -164,9 +164,9 @@ int main(){
                     setCPU(0);
                     setpriority(PRIO_PROCESS, 0, alta);
                     while(1){
-                        if(pa.getFloatValue() > 1.0) setpriority(PRIO_PROCESS, pidFilho1, media);
+                        if(pa > 1.0) setpriority(PRIO_PROCESS, pidFilho1, media);
                         else  setpriority(PRIO_PROCESS, pidFilho1, baixa);
-                        if(pb.getFloatValue() > 1.0) setpriority(PRIO_PROCESS, pidFilho2, media);
+                        if(pb > 1.0) setpriority(PRIO_PROCESS, pidFilho2, media);
                         else  setpriority(PRIO_PROCESS, pidFilho2, baixa);
                     };
                     exit(0);

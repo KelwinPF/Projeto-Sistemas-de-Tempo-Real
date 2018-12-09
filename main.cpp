@@ -28,8 +28,8 @@ BlackGPIO f2Led(GPIO_65,output);
 ADC pot1(AIN0);
 ADC pot2(AIN2);
 float pa, pb, pc, pd;
-unsigned short portaRecebe = 1406;
-unsigned short portaEnvio = 1407;   
+unsigned short portaRecebe = 6601;
+unsigned short portaEnvio = 6602;   
 bool trocaPorta;
 
 #define MULTICAST_ADDR "192.168.0.1"

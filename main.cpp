@@ -27,6 +27,7 @@ BlackGPIO f1Led(GPIO_46,output);
 BlackGPIO f2Led(GPIO_65,output);
 ADC pot1(AIN0);
 ADC pot2(AIN2);
+float pa, pb, pc, pd;
 unsigned short portaRecebe = 1408;
 unsigned short portaEnvio = 1408;   
 bool trocaPorta;
@@ -163,9 +164,9 @@ int main(){
                     setCPU(0);
                     setpriority(PRIO_PROCESS, 0, alta);
                     while(1){
-                        if(va.getFloatValue() > 1.0) setpriority(PRIO_PROCESS, pidFilho1, media);
+                        if(pa.getFloatValue() > 1.0) setpriority(PRIO_PROCESS, pidFilho1, media);
                         else  setpriority(PRIO_PROCESS, pidFilho1, baixa);
-                        if(vb.getFloatValue() > 1.0) setpriority(PRIO_PROCESS, pidFilho2, media);
+                        if(pb.getFloatValue() > 1.0) setpriority(PRIO_PROCESS, pidFilho2, media);
                         else  setpriority(PRIO_PROCESS, pidFilho2, baixa);
                     };
                     exit(0);

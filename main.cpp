@@ -29,7 +29,7 @@ ADC pot1(AIN0);
 ADC pot2(AIN2);
 float pa, pb, pc, pd;
 unsigned short portaRecebe = 1408;
-unsigned short portaEnvio = 1408;   
+unsigned short portaEnvio = 1407;   
 bool trocaPorta;
 
 #define MULTICAST_ADDR "192.168.0.1"

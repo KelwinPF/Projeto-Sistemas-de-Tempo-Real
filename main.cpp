@@ -87,7 +87,7 @@ void recebePrioridades(){
     printf(" IPPROTO_IP = %d\n", IPPROTO_IP);
     printf(" SOL_SOCKET = %d\n", SOL_SOCKET);
     printf(" IP_ADD_MEMBERSHIP = %d \n", IP_ADD_MEMBERSHIP);
-    float prioridades[4];    
+    float prioridades[2];    
     while (!trocaPorta){
         client_len = sizeof(client_address);
         if(recvfrom(server_sockfd, &prioridades, sizeof(prioridades),0,(struct sockaddr *) &client_address, &client_len) < 0 ){

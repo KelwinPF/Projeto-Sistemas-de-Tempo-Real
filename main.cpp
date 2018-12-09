@@ -31,7 +31,7 @@ unsigned short portaRecebe = 1408;
 unsigned short portaEnvio = 1408;   
 bool trocaPorta;
 
-#define MULTICAST_ADDR "192.168.0.2"
+#define MULTICAST_ADDR "192.168.0.1"
 
 void enviaPrioridades(){
     int sockfd;

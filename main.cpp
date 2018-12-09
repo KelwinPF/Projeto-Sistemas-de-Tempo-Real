@@ -11,30 +11,122 @@
 #include <math.h>
 #include "BlackGPIO/BlackGPIO.h"
 #include "ADC/Adc.h"
- 
+#include <thread>
+#include <semaphore.h>
+#include <pthread.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+
 using namespace BlackLib;
 using namespace std;
  
 void carga(int k);
 int setCPU(int i);
+BlackGPIO f1Led(GPIO_46,output);
+BlackGPIO f2Led(GPIO_65,output);
+ADC pot1(AIN0);
+ADC pot2(AIN2);
+unsigned short portaRecebe = 1408;
+unsigned short portaEnvio = 1408;   
+bool trocaPorta;
+
+#define MULTICAST_ADDR "192.168.0.2"
+
+void enviaPrioridades(){
+    int sockfd;
+    int len;
+    socklen_t len_recv;
+    struct sockaddr_in address;
+    float prioridades[2];
+     
+    sockfd  = socket(AF_INET, SOCK_DGRAM,0);  // criacao do socket
+    address.sin_family = AF_INET;
+    address.sin_addr.s_addr = inet_addr(MULTICAST_ADDR);
+    address.sin_port = htons(portaEnvio);    
+    len = sizeof(address);
  
+    while (1){
+        prioridades[0]= pot1.getPercentValue();
+        prioridades[1]= pot2.getPercentValue();
+        //prioridades[2]= potC.getPercentValue();
+        //prioridades[3]= potD.getPercentValue();
+        sendto(sockfd, &prioridades,sizeof(prioridades),0,(struct sockaddr *) &address, len);
+        usleep(1000000);
+    }
+    exit(0);
+}
+void recebePrioridades(){
+    int server_sockfd, client_sockfd;
+    size_t server_len;
+    socklen_t client_len;
+    struct sockaddr_in server_address;
+    struct sockaddr_in client_address;
+    struct ip_mreq mreq;  
+     
+    if ((server_sockfd = socket(AF_INET, SOCK_DGRAM, 0) )  < 0  ){
+        printf(" Houve erro na ebertura do socket ");
+        exit(1);
+    }
+    server_address.sin_family = AF_INET;
+    server_address.sin_addr.s_addr = htonl(INADDR_ANY);
+    server_address.sin_port = htons(portaRecebe);
+    server_len = sizeof(server_address);
+    if(bind(server_sockfd, (struct sockaddr *) &server_address, server_len) < 0 ){
+        perror("Houve error no Bind");
+        exit(1);
+    }
+
+    mreq.imr_multiaddr.s_addr=inet_addr(MULTICAST_ADDR);
+    mreq.imr_interface.s_addr=htonl(INADDR_ANY);
+    if (setsockopt(server_sockfd,IPPROTO_IP,IP_ADD_MEMBERSHIP,&mreq,sizeof(mreq)) < 0) {
+        perror("setsockopt");
+        exit(1);
+    }
+    printf(" IPPROTO_IP = %d\n", IPPROTO_IP);
+    printf(" SOL_SOCKET = %d\n", SOL_SOCKET);
+    printf(" IP_ADD_MEMBERSHIP = %d \n", IP_ADD_MEMBERSHIP);
+    float prioridades[4];    
+    while (!trocaPorta){
+        client_len = sizeof(client_address);
+        if(recvfrom(server_sockfd, &prioridades, sizeof(prioridades),0,(struct sockaddr *) &client_address, &client_len) < 0 ){
+            perror(" erro no RECVFROM( )");
+            exit(1);
+        }
+        pa = prioridades[0];
+        pb = prioridades[1];
+        //vc = prioridades[2];
+        //vd = prioridades[3];
+         
+    }
+ 
+    close(server_sockfd);
+    exit(0);
+}
+
 int main(){
  
     int i=0;
     int tCarga = 50;
- 
+ 	
     unsigned int pidFilho1, pidFilho2;
- 
-    BlackGPIO f1Led(GPIO_46,output);
-    BlackGPIO f2Led(GPIO_65,output);
-    ADC pot1(AIN0);
-    ADC pot2(AIN2);
-    float potValue;
+
     int alta = -10;
     int media = 0;
     int baixa = 5;
-    printf("teste");
+
     pidFilho1 = fork();//cria filho 1
+    thread envia(enviaPrioridades);
+    usleep(1000000);
+    trocaPorta = false;
+    cout<<"digite a porta para envio";
+
+    cin>> portaEnvio;
+
+    thread recebe(recebePrioridades);
+
+    usleep(1000000);
+
     switch(pidFilho1){
         case -1:
             exit(1);
@@ -71,9 +163,9 @@ int main(){
                     setCPU(0);
                     setpriority(PRIO_PROCESS, 0, alta);
                     while(1){
-                        if(pot1.getFloatValue() > 1.0) setpriority(PRIO_PROCESS, pidFilho1, media);
+                        if(va.getFloatValue() > 1.0) setpriority(PRIO_PROCESS, pidFilho1, media);
                         else  setpriority(PRIO_PROCESS, pidFilho1, baixa);
-                        if(pot2.getFloatValue() > 1.0) setpriority(PRIO_PROCESS, pidFilho2, media);
+                        if(vb.getFloatValue() > 1.0) setpriority(PRIO_PROCESS, pidFilho2, media);
                         else  setpriority(PRIO_PROCESS, pidFilho2, baixa);
                     };
                     exit(0);
@@ -81,6 +173,7 @@ int main(){
     }
     exit(0);
 }
+
 void carga(int k){
     float f = 0.999999;
     for(int i=0; i<k; i++){

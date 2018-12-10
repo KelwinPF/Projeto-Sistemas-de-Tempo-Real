@@ -28,8 +28,8 @@ BlackGPIO f2Led(GPIO_65,output);
 ADC pot1(AIN0);
 ADC pot2(AIN2);
 float pa, pb, pc, pd;
-unsigned short portaRecebe = 6601;
-unsigned short portaEnvio = 6602;   
+unsigned short portaRecebe = 1408;
+unsigned short portaEnvio = 1408;   
 bool trocaPorta;
 
 #define MULTICAST_ADDR "225.0.0.37"
@@ -120,9 +120,9 @@ int main(){
     thread envia(enviaPrioridades);
     usleep(1000000);
     trocaPorta = false;
-   //cout<<"digite a porta para envio";
+    cout<<"digite a porta para envio";
 
-    //cin>> portaEnvio;
+    cin>> portaEnvio;
 
     thread recebe(recebePrioridades);
 

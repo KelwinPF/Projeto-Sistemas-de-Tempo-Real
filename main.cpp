@@ -45,7 +45,7 @@ void enviaPrioridades(){
     int len;
     socklen_t len_recv;
     struct sockaddr_in address;
-    float prioridades[2];
+    float prioridades[4];
      
     sockfd  = socket(AF_INET, SOCK_DGRAM,0);  // criacao do socket
     address.sin_family = AF_INET;
@@ -54,10 +54,10 @@ void enviaPrioridades(){
     len = sizeof(address);
  
     while (1){
-        prioridades[0]= pot1.getPercentValue();
-        prioridades[1]= pot2.getPercentValue();
-        prioridades[2]= pot3.getPercentValue();
-        prioridades[3]= pot4.getPercentValue();
+        prioridades[0]= pot1.getFloatValue();
+        prioridades[1]= pot2.getFloatValue();
+        prioridades[2]= pot3.getFloatValue();
+        prioridades[3]= pot4.getFloatValue();
         sendto(sockfd, &prioridades,sizeof(prioridades),0,(struct sockaddr *) &address, len);
         usleep(1000000);
     }
